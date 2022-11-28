@@ -1,0 +1,195 @@
+﻿@model IEnumerable<MAYShop.Models.FeedBack>
+@{
+    Layout = null;
+}
+<div class="row">
+    <!-- Rating -->
+
+    <div class="col-md-3">
+        <div id="rating">
+            <div class="rating-avg">
+                <span>5,0</span>
+                <div class="rating-stars">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+            <ul class="rating">
+                <li>
+                    <div class="rating-stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="rating-progress">
+                        <div style="width: 80%;"></div>
+                    </div>
+                    <span class="sum">3</span>
+                </li>
+                <li>
+                    <div class="rating-stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="rating-progress">
+                        <div style="width: 60%;"></div>
+                    </div>
+                    <span class="sum">2</span>
+                </li>
+                <li>
+                    <div class="rating-stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="rating-progress">
+                        <div></div>
+                    </div>
+                    <span class="sum">0</span>
+                </li>
+                <li>
+                    <div class="rating-stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="rating-progress">
+                        <div></div>
+                    </div>
+                    <span class="sum">0</span>
+                </li>
+                <li>
+                    <div class="rating-stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="rating-progress">
+                        <div></div>
+                    </div>
+                    <span class="sum">0</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Rating -->
+    <!-- Reviews -->
+    <div class="col-md-6">
+        <div id="reviews">
+            <ul class="reviews">
+                @foreach (var bl in Model)
+                {
+                    <li>
+                        <div class="review-heading">
+                            <h5 class="name">@bl.FullName</h5>
+                            <p class="date">@bl.DateRate</p>
+                            <div class="review-rating">
+                                @if (bl.Rating == 5)
+                                {
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                }
+                                else if (bl.Rating == 4)
+                                {
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                }
+                                else if (bl.Rating == 3)
+                                {
+
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                }
+                                else if (bl.Rating == 2)
+                                {
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                            </div>
+                        </div>
+                        <div class="review-body">
+                            <p>@bl.Note</p>
+                        </div>
+                    </li>
+                }
+
+
+
+            </ul>
+            <ul class="reviews-pagination">
+                <li class="active">1</li>
+               
+            </ul>
+        </div>
+    </div>
+
+    <!-- /Reviews -->
+    <!-- Review Form -->
+    <div class="col-md-3">
+        <div id="review-form">
+            @using (Html.BeginForm("BinhLuan", "Comment", FormMethod.Post, new { @class = "review-form" }))
+            {
+                <div class="form-group">
+                    <label>Your rating</label>
+                    <div class="reviews-counter">
+                        <div class="rating">
+                            <input type="radio" id="star5" name="DanhGia" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="DanhGia" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="DanhGia" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="DanhGia" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="DanhGia" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Your message</label>
+                    <textarea class="input" placeholder="Nhập bình luận" name="NoiDung" rows="5"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="HoTen" class="form-control" placeholder="Name*" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="Email" class="form-control" placeholder="Email Id*" required>
+                        </div>
+                    </div>
+                </div>
+                <button class="round-black-btn">Submit Review</button>
+            }
+        </div>
+    </div>
+    <!-- /Review Form -->
+</div>

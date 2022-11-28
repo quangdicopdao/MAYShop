@@ -1,0 +1,26 @@
+﻿@model IEnumerable<MAYShop.Models.Brand>
+
+                <div class="card">
+                    <div class="card-heading">
+                        <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
+                    </div>
+                    <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="shop__sidebar__brand">
+                                <ul>
+                                    @foreach (var b in Model)
+                                    {
+                                        <li><a href="@Url.Action("SanPhamTheoBrand","MayShop",new { id = b.BrandID })">@b.Name</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+

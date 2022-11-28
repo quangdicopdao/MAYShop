@@ -1,0 +1,111 @@
+﻿@using MAYShop.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<Product>
+@{
+    ViewBag.Title = "Shop";
+    Layout = "~/Views/Shared/_LayoutShop.cshtml";
+}
+
+
+
+<section class="shop spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="shop__sidebar">
+                    <div class="shop__sidebar__accordion">
+                        <div class="accordion" id="accordionExample">
+                            @Html.Action("SearchPartial", "MayShop")
+                            @Html.Action("BrandPartial", "MayShop")
+                            @Html.Action("SizePartial", "MayShop")
+                            @Html.Action("TagPartial", "MayShop")
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="shop__product__option">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__left">
+                                <p>Showing 1–12 of 126 results</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__right">
+                                <div class="header__top__hover" ;>
+                                    <span style="color:black;">Lọc theo giá <i class="arrow_carrot-down"></i></span>
+                                    <ul>
+                                        <li><a href="@Url.Action("Shop","MayShop",new { str = "Giam" })" style="color:black">Gía giảm dần</a></li>
+                                        <li><a href="@Url.Action("Shop","MayShop",new { str = "Tang" })" style="color:black">Gía tăng dần</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
+                                        <a href="@Url.Action("ChiTietSanPham","MayShop",new { id = item.ProductID })"><img src="~/Img/@item.Picture" /></a>
+                                        <ul class="product__hover">
+                                            <li><a href="#"><img src="~/Content/img/icon/heart.png" alt=""></a></li>
+                                            <li>
+                                                <a href="#"><img src="~/Content/img/icon/compare.png" alt=""> <span>Compare</span></a>
+                                            </li>
+                                            <li><a href="#"><img src="~/Content/img/icon/search.png" alt=""></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <br />
+                                        <h6>@item.Title</h6>
+                                        <a href="#" class="add-cart">+ Add To Cart</a>
+                                        <div class="rating">
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </div>
+                                        <h5>@item.Price</h5>
+                                        <div class="product__color__select">
+                                            <label for="pc-4">
+                                                <input type="radio" id="pc-4">
+                                            </label>
+                                            <label class="active black" for="pc-5">
+                                                <input type="radio" id="pc-5">
+                                            </label>
+                                            <label class="grey" for="pc-6">
+                                                <input type="radio" id="pc-6">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="row">
+                    Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+                    <div class="col-lg-12">
+                        <div class="product__pagination">
+                            @Html.PagedListPager(Model, page => Url.Action("SanPhamTheoTag", new
+                  {
+                      iTagID = ViewBag.TagID,
+                           page = page
+                  }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Shop Section End -->

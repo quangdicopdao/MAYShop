@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutShop.cshtml";
+}
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Shopping Cart</h4>
+                    <div class="breadcrumb__links">
+                        <a href="@Url.Action("Index","MayShop")">Home</a>
+                        <a href="@Url.Action("Shop","MayShop")">Shop</a>
+                        <span>Shopping Cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Shopping Cart Section Begin -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="shopping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                using (Html.BeginForm("UpdateCart", "ShoppingCart", new { id = item.ProductID }))
+                                {
+                            <tr>
+                                <td class="product__cart__item">
+
+                                    <div class="product__cart__item__text">
+                                        <h6>@item.Title</h6>
+                                    </div>
+                                    <div class="product__cart__item__pic" style="width:100px;">
+                                        <img src="~/Img/@item.Picture" alt="">
+                                    </div>
+                                </td>
+
+                                <td class="quantity__item">
+                                    <div class="quantity">
+                                        <div class="pro-qty-2">
+                                            <input type="number" name="txtSoLuong" min="1" value="@item.Quantity">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="cart__price">@Html.FormatValue(item.Price, "{0:#,##0}")</td>
+                                <td class="cart__close"><a href="@Url.Action("DeleteItem", "ShoppingCart", new { @id = item.ProductID })"><i class="fa fa-trash"></i></a></td>
+                                <td class="cart__close">
+                                    <button type="submit" style="border:0;border-radius:40%;">
+                                        <i class="fa fa-refresh"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                                }
+
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn">
+                            <a href="@Url.Action("Shop","MayShop")">Continue Shopping</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn update__btn">
+                            <a href="@Url.Action("DeleteCart","ShoppingCart")"><i class="fa fa-spinner"></i> Delete cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="cart__total">
+                    <h6>Cart total</h6>
+                    <ul>
+                        <li>Quantity <span>@ViewBag.TongSoLuong</span></li>
+                        <li>Total <span>@Html.FormatValue(ViewBag.TongTien, "{0:#,##0}")</span></li>
+                    </ul>
+                    <a href="@Url.Action("Checkout","ShoppingCart")" class="primary-btn">Proceed to checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shopping Cart Section End -->

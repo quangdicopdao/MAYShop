@@ -1,0 +1,73 @@
+﻿
+@using MAYShop.Models;
+@{
+    Customer ad = (Customer)Session["admin"];
+}
+<ul class="nav navbar-top-links navbar-right">
+    <li>
+        <a href="@Url.Action("Index","LienHe")">
+            <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+
+
+
+        <!-- /.dropdown-alerts -->
+    </li>
+
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index","BinhLuan")">
+            <i class="fa fa-comment fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+
+        <ul class="dropdown-menu dropdown-messages">
+            <li>
+                <a href="#">
+                    <div>
+                        <strong>LapTop Acer</strong>
+                        <span class="pull-right text-muted">
+                            <em>Yesterday</em>
+                        </span>
+                    </div>
+                    <div>Sản phẩm rất tốt, tôi rất ưng ý.</div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a class="text-center" href="@Url.Action("Index","BinhLuan")">
+                    <strong>Xem tất cả nhận xét</strong>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+
+        <!-- /.dropdown-messages -->
+    </li>
+    <!-- /.dropdown -->
+    <li class="dropdown">
+
+        @if (Session["admin"] == null)
+        {
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </a>
+        }
+        else
+        {
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                @ad.FullName
+                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a href="#"></a>
+                    <a href="@Url.Action("Logout", "Admin")"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
+                </li>
+            </ul>
+        }
+
+        <!-- /.dropdown-user -->
+    </li>
+    <!-- /.dropdown -->
+</ul>
+
+

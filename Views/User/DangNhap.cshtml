@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/css/UserLoginLogout.css" rel="stylesheet" />
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <!-- The image half -->
+        <div class="col-md-6 d-none d-md-flex bg-image">
+            
+        </div>
+
+        <!-- The content half -->
+        <div class="col-md-6 bg-light">
+            <div class="login d-flex align-items-center py-5">
+
+                <!-- Demo content-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-7 mx-auto">
+                            <h3 class="display-4">Đăng nhập</h3>
+                            <p class="text-muted mb-4">Chào mừng đến với MAY shop!</p>
+                            @using (Html.BeginForm("DangNhap", "User"))
+                            {
+                                @Html.ValidationSummary(true)
+                                <div class="form-group mb-3">
+                                    <input id="inputEmail" type="text" name="TenDN" placeholder="Tên đăng nhập" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input id="inputPassword" type="password" name="MatKhau" placeholder="Mật khẩu" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                </div>
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                                    <label for="customCheck1" class="custom-control-label">Lưu thông tin của tôi</label>
+                                    <a href="#" style="float:right">Quên mật khẩu?</a>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Đăng nhập</button>
+                                <div class="text-center d-flex justify-content-between mt-4">
+                                    <p>
+                                        Chưa có tài khoản? <a href="@Url.Action("DangKy","User")">Đăng ký ngay</a>
+                                    </p>
+                                </div>
+                            }
+                            
+                        </div>
+                    </div>
+                </div><!-- End -->
+
+            </div>
+        </div><!-- End -->
+
+    </div>
+</div>
